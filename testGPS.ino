@@ -47,19 +47,11 @@ char output[LEN];
 char date_str[20];
 long wtimer;
 
-bool sendData = true;
 void setup()
 {
   Serial.begin(9600 );                   // Запускаем последовательный порт с ПК на скорости 9600
   gpsSerial.begin(GPSBaud);             // Запустите последовательный порт с NEO-6M на скорости 9600
   Serial1.begin(GPRSBaud);                       // Запуск последовательного порта с GPRS Shield на скорости 9600
- /*doc["lat"].set(0);
-  doc["lon"].set(0);
-  doc["alt"].set(0);
-  doc["h"].set(0);
-  doc["m"].set(0);
-  doc["s"].set(0);
-  doc["cs"].set(0);*/
   doc["animal"].set(1);
   doc["location_lat"].set(0);
   doc["location_lon"].set(0);
@@ -124,9 +116,6 @@ void displayInfo()
         Serial.print(day_r);
         Serial.print("/");
         Serial.println(year_r);
-        now_time = hour_r+minute_r+second_r;
-        //if (sendData)
-        //{
         if(now_time!=prev_time)
         {
           gprs.powerOn();
@@ -137,8 +126,6 @@ void displayInfo()
           httpRequest();
           prev_time=now_time;
         }
-        //}
-        //sendData = false;
       }
       else
       {
@@ -172,13 +159,6 @@ void displayInfo()
 
 void httpRequest()
 {
-  /*doc["lat"].set(latitude_r);
-  doc["lon"].set(longitude_r);
-  doc["alt"].set(altitude_r);
-  doc["h"].set(hour_r);
-  doc["m"].set(minute_r);
-  doc["s"].set(second_r);
-  doc["cs"].set(centisecond_r);*/
   doc["animal"].set(1);
   doc["location_lat"].set(latitude_r);
   doc["location_lon"].set(longitude_r);
